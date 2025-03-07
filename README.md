@@ -99,6 +99,7 @@ REINFORCE-style算法的效果可能受限于其没有credit assignment以区分
 * 关于计算advantage
     * `algorithm.adv_estimator`：使用哪种方法计算advantage
     * `algorithm.kl_penalty`：如果将KL放在奖励中，使用k1/2/3估计
+    * `actor_rollout_ref.actor.fsdp_config.param_offload`：是否在推理之后offload参数。如果打开，还会在推理之前onload参数
 
 * 关于更新
     * `actor_rollout_ref.actor.ppo_mini_batch_size`：一次更新使用多少prompt，如果小于`data.train_batch_size`，那么一次rollout将更新多次，也就是使用了代理目标$L^{\text{clip}}$。实际更新所用的completion数还要乘`actor_rollout_ref.rollout.n`
@@ -106,3 +107,5 @@ REINFORCE-style算法的效果可能受限于其没有credit assignment以区分
     * `actor_rollout_ref.actor.clip_ratio`：上述$L^{\text{clip}}$中的$\epsilon$
     * `use_kl_loss`：是否在奖励之外施加KL正则
     * `kl_loss_type`：如果将KL放在奖励外，使用k1/2/3估计
+    * `actor_rollout_ref.actor.fsdp_config.optimizer_offload`：是否在更新之后offload优化器状态。如果打开，还会在更新之前onload优化器状态
+    
